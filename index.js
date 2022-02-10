@@ -14,7 +14,9 @@ const whitelist = [
   "http://cecati13.com.mx",
   "http://www.cecati13.com.mx",
   "https://cecati13.com.mx",
-  "https://www.cecati13.com.mx"];
+  "https://www.cecati13.com.mx",
+  "https://cecati13.ddns.net",
+  "http://cecati13.ddns.net"];
 const options = {
   origin: (origin, cb) => {
     if (whitelist.includes(origin) || !origin) {
