@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const csvtojson = require("csvtojson");
 const EducativeOfferService = require("../services/EducativeOfferService");
 
 const service = new EducativeOfferService();

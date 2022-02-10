@@ -6,12 +6,10 @@ const path = require("path");
 const pathProyect = require("../path")
 const { format } = require("date-fns")
 
-const time = format(new Date(), 'dd/MMM/yyyy HH:mm:ss');
-
 const pathOfertaEducativa = path.join(pathProyect + "/ofertaEducativa")
+
 //esta configuracion permite que el nombre y la extension lleven significado al guardarse
 const storage = multer.diskStorage({
-  //no esta guardando el archivo en alguna parte aqui esta el fallo:
   destination : pathOfertaEducativa,
   //la propiedad filename recibe una funcion
   //los parametros son req: informacion de la peticion, file: archivo que se esta subiendo y un CB
@@ -32,8 +30,10 @@ const upload = multer({
 
 router.post(
   "/", upload.single("csvOferta"), (req, res) => {
+    const time = format(new Date(), 'dd/MMM/yyyy HH:mm:ss');
     res.send(`El archivo ha sido recibido. ${time}`)
-    const messageDate = "Oferta Educativa actualizada. " + time;
+    const messageDate = "Archivo de Oferta Educativa recibido el: " + time;
+    console.log(messageDate)
     fs.writeFileSync(pathOfertaEducativa + "/timestamp.txt",
       messageDate,
       ()=> console.log(messageDate)
