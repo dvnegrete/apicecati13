@@ -1,5 +1,12 @@
 const dns =require("dns");
-const plantel = "cecati13.ddns.net"
+const plantel = "cecati13.ddns.net";
+
+const isSchool = dns.lookup(plantel, (err, address) => {
+  if(err){
+    console.log("Fallo la consulta DNS del plantel")
+  }
+  return "http://" + plantel;
+})
 
 const whitelist = [
   "http://localhost:3500",
@@ -10,13 +17,6 @@ const whitelist = [
   "https://www.cecati13.com.mx",
   isSchool
 ];
-
-const isSchool = dns.lookup(plantel, (err, address) => {
-  if(err){
-    console.log("Fallo la consulta DNS del plantel")
-  }
-  return "http://" + plantel;
-})
 
 const options = {
   origin: (origin, cb) => {
