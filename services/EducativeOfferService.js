@@ -18,7 +18,7 @@ class EducativeOfferService {
   }
 
   generate(){
-    const fileCSV = path.join(pathProyect + "/ofertaEducativa/prueba.csv");
+    const fileCSV = path.join(pathProyect + "/ofertaEducativa/programacionCursos.csv");
     this.readCSV(fileCSV)
   }
 
