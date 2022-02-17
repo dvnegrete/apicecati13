@@ -4,16 +4,16 @@ const path = require("path");
 const pathProyect = require("../path");
 const { format } = require("date-fns")
 
-const updateLapse = 3600000
+const updateLapse = 60000
 //3600000 es 1 hora, 60000 es 1 minuto
 
 class EducativeOfferService {
   constructor(){
     const jsonOffer = [];
     this.generate();
+    const jsonOfferSpecialities = [];
     setInterval(() => {
       this.generate();
-      console.log("Actualizando API Oferta Educativa... ",format(new Date(), 'dd/MMM/yyyy HH:mm:ss'))
     }, updateLapse);
   }
 
@@ -27,11 +27,31 @@ class EducativeOfferService {
       const CSV = data.toString()
       const json = csv2json(CSV, { parseNumbers: true });
       this.jsonOffer = [...json];
+      const specialities = this.sortBySpeciality(this.jsonOffer);
+      this.jsonOfferSpecialities = [...specialities]
     })
   }
 
   find(){
-    return this.jsonOffer
+    return this.jsonOfferSpecialities;
+  }
+
+  sortBySpeciality(array){
+    const onlySpecialities = [];
+    array.forEach( item => {
+      if (!onlySpecialities.includes(item.especialidad)) {
+        onlySpecialities.push(item.especialidad)
+      }
+    });
+    const forSpecialities = onlySpecialities.map( item => {
+      const coursesArray = array.filter( itemObj => itemObj.especialidad === item)
+      const objSpecialities = {
+        specialty : item,
+        courses : coursesArray
+      }
+      return objSpecialities
+    })
+    return forSpecialities;
   }
 
 }
