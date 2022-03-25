@@ -2,6 +2,7 @@ const express = require("express");
 const uploadRouter = require("./uploadRouter");
 const updateRouter = require("./updateRouter");
 const educativeOffer = require("./educativeOfferRouter");
+const specialitieRouter = require("./specialitieRouter");
 
 function routerApi(app) {
   const router = express.Router();
@@ -12,6 +13,7 @@ function routerApi(app) {
   router.use("/upload", uploadRouter);
   router.use("/update", updateRouter);
   router.use("/educativeOffer", educativeOffer)
+  router.use("/specialtie", specialitieRouter)
 }
 
 module.exports = routerApi;

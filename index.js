@@ -11,6 +11,7 @@ const expressionPath = /dvnegrete/
 const port = process.env.PORT || (expressionPath.test(path) ? 3500 : 80);
 
 app.use(cors());
+app.use(express.json());
 
 app.get("/", (req, res) =>{
   res.send("Bienvenido. Identifícate por favor.");
